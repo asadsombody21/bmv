@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Sher 💖 Valentine</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      height: 100vh;
+      font-family: 'Comic Sans MS', 'Poppins', Arial, sans-serif;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: radial-gradient(circle at top, #ffb6c1, #ff69b4, #ff1493);
+      overflow: hidden;
+    }
+
+    .card {
+      background: #ffe4ec;
+      padding: 45px 30px;
+      border-radius: 30px;
+      text-align: center;
+      box-shadow: 0 25px 50px rgba(255,20,147,0.35);
+      max-width: 360px;
+      width: 90%;
+      border: 4px solid #ff69b4;
+    }
+
+    h1 {
+      color: #ff1493;
+      margin-bottom: 15px;
+      font-size: 28px;
+    }
+
+    p {
+      color: #ff4f9a;
+      margin-bottom: 35px;
+      font-size: 17px;
+    }
+
+    .buttons {
+      position: relative;
+      height: 130px;
+    }
+
+    button {
+      padding: 16px 30px;
+      font-size: 17px;
+      border: none;
+      border-radius: 18px;
+      cursor: pointer;
+      position: absolute;
+      font-weight: bold;
+    }
+
+    #yes {
+      background: linear-gradient(135deg, #ff69b4, #ff1493);
+      color: white;
+      left: 30px;
+      top: 45px;
+      box-shadow: 0 8px 20px rgba(255,20,147,0.5);
+      animation: pulse 1.5s infinite;
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.08); }
+      100% { transform: scale(1); }
+    }
+
+    #no {
+      background: #ffd1e8;
+      color: #ff1493;
+      left: 180px;
+      top: 45px;
+    }
+
+    .hearts {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .heart {
+      position: absolute;
+      font-size: 22px;
+      animation: float 4s linear infinite;
+    }
+
+    @keyframes float {
+      0% {
+        transform: translateY(110vh) scale(1);
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-10vh) scale(1.6);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="card" id="card">
+    <h1>Sher will you be my valentine 💗</h1>
+    <p>There is only one correct answer 💕</p>
+
+    <div class="buttons">
+      <button id="yes">YES 💖</button>
+      <button id="no">NO 😒</button>
+    </div>
+  </div>
+
+  <div class="hearts" id="hearts"></div>
+
+  <script>
+    const noBtn = document.getElementById("no");
+    const yesBtn = document.getElementById("yes");
+    const card = document.getElementById("card");
+    const hearts = document.getElementById("hearts");
+
+    function moveNo() {
+      const maxX = card.clientWidth - noBtn.clientWidth;
+      const maxY = card.clientHeight - noBtn.clientHeight;
+
+      const x = Math.random() * maxX;
+      const y = Math.random() * maxY;
+
+      noBtn.style.left = x + "px";
+      noBtn.style.top = y + "px";
+    }
+
+    noBtn.addEventListener("mouseover", moveNo);
+    noBtn.addEventListener("click", moveNo);
+    noBtn.addEventListener("touchstart", moveNo);
+
+    yesBtn.addEventListener("click", () => {
+      card.innerHTML = `
+        <h1>I KNEW IT 💖🥰</h1>
+        <p>You are officially my Valentine 💕</p>
+        <p>Get ready for love, snacks, and cuddles 😘</p>
+      `;
+
+      for (let i = 0; i < 35; i++) {
+        const heart = document.createElement("div");
+        heart.className = "heart";
+        heart.innerHTML = "💗";
+        heart.style.left = Math.random() * 100 + "vw";
+        heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+        hearts.appendChild(heart);
+        setTimeout(() => heart.remove(), 5000);
+      }
+    });
+  </script>
+
+</body>
+</html>
